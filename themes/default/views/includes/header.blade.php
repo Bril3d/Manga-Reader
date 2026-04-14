@@ -17,7 +17,10 @@
                 @foreach(config('app.locales') as $locale)
                 <x-navbar.nav-link link="{{ route('language.switch', ['locale' => $locale]) }}" icon="fas-language" text="{{ strtoupper($locale) }}" />
                 @endforeach
-                <x-navbar.nav-link id="dark-toggle" link="#" icon="fas-sun" aria-label="{{ __('Dark Mode') }}" />
+                <x-navbar.nav-link id="dark-toggle" link="#" aria-label="{{ __('Toggle Theme') }}">
+                    <x-fas-sun class="h-4 w-4 block dark:hidden text-yellow-400" />
+                    <x-fas-moon class="h-4 w-4 hidden dark:block text-neon-purple" />
+                </x-navbar.nav-link>
             </div>
             <a href="#" id="user-menu-button" aria-label="usermenu">
                 <img class="h-9 w-9 object-cover object-top rounded-full border-[1px] border-solid border-black/10" alt="avatar" src="{{ auth()->check() && auth()->user()->avatar ? asset('storage/avatars/' . auth()->user()->avatar) : asset('images/user/no-image.jpg') }}" />

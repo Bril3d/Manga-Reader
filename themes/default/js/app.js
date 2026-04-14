@@ -74,27 +74,43 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (localStorage.getItem("darkMode") === "false") {
-    if (document.querySelector("html")?.classList?.contains("dark")) {
-      document.querySelector("html")?.classList?.remove("dark");
+  const setTheme = (isDark) => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
+    
+    if (editor) {
+      if (isDark) editor.classList.add("toastui-editor-dark");
+      else editor.classList.remove("toastui-editor-dark");
+    }
+  };
+
+  // 1. Initial Load
+  const savedTheme = localStorage.getItem("darkMode");
+  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+  if (savedTheme !== null) {
+    setTheme(savedTheme === "true");
+  } else {
+    setTheme(systemDark.matches);
   }
 
+  // 2. Listen for System Preference Changes
+  systemDark.addEventListener("change", (e) => {
+    if (localStorage.getItem("darkMode") === null) {
+      setTheme(e.matches);
+    }
+  });
+
+  // 3. Manual Toggle
   if (darkToggle) {
     darkToggle.addEventListener("click", function (e) {
       e.preventDefault();
-      let isDark = document.querySelector("html")?.classList?.contains("dark") ? true : false;
-      localStorage.setItem("darkMode", !isDark);
-      document.querySelector("html")?.classList?.toggle("dark");
-
-      // if editor
-      if (editor) {
-        if (editor.classList?.contains("toastui-editor-dark")) {
-          editor.classList?.remove("toastui-editor-dark");
-        } else {
-          editor.classList?.add("toastui-editor-dark");
-        }
-      }
+      const isDark = !document.documentElement.classList.contains("dark");
+      localStorage.setItem("darkMode", isDark);
+      setTheme(isDark);
     });
   }
 

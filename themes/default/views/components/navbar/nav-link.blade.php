@@ -9,4 +9,6 @@
     @if ($text)
         <span>{{ $text }}</span>
     @endif
+
+    {{ $slot }}
 </a>

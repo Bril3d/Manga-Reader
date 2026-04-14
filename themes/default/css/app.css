@@ -6,7 +6,7 @@
 
 @layer components {
   .glass {
-    @apply bg-surface-variant/60 backdrop-blur-[20px] border border-outline-variant;
+    @apply bg-surface-variant/60 backdrop-blur-[20px] border border-outline-variant transition-colors duration-300;
   }
   
   .glass-card {
@@ -38,6 +38,11 @@
 
 html {
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 @keyframes fadeIn {
