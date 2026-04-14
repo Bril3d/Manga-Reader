@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   if (titleInput && slugInput) {
-    title.addEventListener("keyup", function () {
+    titleInput.addEventListener("keyup", function () {
       const title = titleInput.value.trim();
       const slug = title.replace(/\s+/g, "-").replace(/-$/, "");
       slugInput.value = slug.toLowerCase();
@@ -196,6 +196,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function initializeSwiper(containerSelector, breakpoints) {
     const swiperEl = document.querySelector(containerSelector);
+    if (!swiperEl) return;
+
     swiperEl.style.display = "block";
 
     Object.assign(swiperEl, {
@@ -203,7 +205,9 @@ document.addEventListener("DOMContentLoaded", function () {
       breakpoints,
     });
 
-    swiperEl.initialize();
+    if (typeof swiperEl.initialize === "function") {
+      swiperEl.initialize();
+    }
   }
 
   const swipterSettings = {
@@ -247,9 +251,9 @@ document.addEventListener("DOMContentLoaded", function () {
       submitButton.disabled = true;
       submitButton.classList.add("disabled:cursor-not-allowed");
       btnLoader.classList.remove("hidden");
-      if (this.querySelector('button[type="submit"] #btn-icon')) {
-        btnLoader.classList.add("!right[50%]");
-        this.querySelector('button[type="submit"] #btn-icon').classList.add("hidden");
+      if (form.querySelector('button[type="submit"] #btn-icon')) {
+        btnLoader.classList.add("!right-[50%]");
+        form.querySelector('button[type="submit"] #btn-icon').classList.add("hidden");
       }
 
       btnText.textContent = `${language.submitting}...`;

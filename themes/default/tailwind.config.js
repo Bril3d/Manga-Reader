@@ -39,6 +39,7 @@ export default {
         "on-surface": "#e4e1e6",
         "outline-variant": "#2d2c33", // Updated to hex for better modifier support
         "dark-primary": "#131316", // Updating existing for compatibility
+        "dark-secondary": "#18181b",
       },
       backdropBlur: {
         xs: "2px",

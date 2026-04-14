@@ -5,7 +5,7 @@
 
 @if(settings()->get('theme.slider') == 'enabled' && $sliders->count() > 0)
 <section class="mb-12 -mt-8 relative h-[60vh] lg:h-[75vh] w-full overflow-hidden rounded-3xl group">
-    <swiper-container id="home-slider" navigation="true" pagination="true" effect="fade" class="h-full w-full">
+    <swiper-container id="home-slider" init="false" navigation="true" pagination="true" effect="fade" class="h-full w-full">
         @foreach ($sliders as $manga)
         <swiper-slide class="relative h-full w-full cursor-pointer" onclick="location.href = '{{ route('manga.show', $manga->slug) }}';">
             <div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/40 to-transparent z-10"></div>
@@ -46,7 +46,7 @@
         <a href="#" class="text-neon-purple font-manrope font-bold text-sm hover:underline">View All</a>
     </div>
 
-    <swiper-container id="popular-mangas" slides-per-view="auto" space-between="24" class="pb-8">
+    <swiper-container id="popular-mangas" init="false" slides-per-view="auto" space-between="24" class="pb-8">
         @foreach ($popular as $manga)
         <swiper-slide class="w-48 sm:w-56 group">
             <a href="{{ url('/manga/' . $manga->slug) }}" class="block">
@@ -74,7 +74,7 @@
 <x-ads.main identifier="above-latest-home" />
 <section>
     <h2 class="text-lg font-bold my-3">{{ __('Recently Added') }}</h2>
-    <swiper-container class="!hidden" id="latest-mangas">
+    <swiper-container class="!hidden" id="latest-mangas" init="false">
         @foreach ($latest as $manga)
         <swiper-slide class="rounded-lg">
             <a href="{{ url('/manga/' . $manga->slug) }}">

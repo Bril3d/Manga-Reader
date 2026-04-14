@@ -14,9 +14,9 @@
         </div>
         <div class="relative flex gap-2 sm:gap-5 items-center">
             <div class="flex gap-1">
-                {{-- @foreach(config('app.locales') as $locale)
+                @foreach(config('app.locales') as $locale)
                 <x-navbar.nav-link link="{{ route('language.switch', ['locale' => $locale]) }}" icon="fas-language" text="{{ strtoupper($locale) }}" />
-                @endforeach --}}
+                @endforeach
                 <x-navbar.nav-link id="dark-toggle" link="#" icon="fas-sun" aria-label="{{ __('Dark Mode') }}" />
             </div>
             <a href="#" id="user-menu-button" aria-label="usermenu">

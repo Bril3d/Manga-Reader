@@ -23,6 +23,6 @@
         , };
 
     </script>
-    @vite(['themes/'. config('theme.active') .'/css/app.css', 'themes/'. config('theme.active') .'/js/app.js'])
     <script src="{{ asset('js/swiper-element-bundle.min.js') }}" defer></script>
+    @vite(['themes/'. config('theme.active') .'/css/app.css', 'themes/'. config('theme.active') .'/js/app.js'])
 </head>
