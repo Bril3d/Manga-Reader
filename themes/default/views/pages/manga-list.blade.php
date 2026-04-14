@@ -73,36 +73,7 @@
 
 <div class="grid grid-cols-3 gap-[10px] sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xlg:grid-cols-8">
     @foreach ($mangas as $manga)
-
-    <div class="rounded-lg">
-        <a href="{{ route('manga.show', $manga->slug) }}">
-            <figure class="relative">
-                <div class="absolute left-0 bottom-0 h-full w-full bg-gradient-to-b from-transparent to-black/50 rounded-lg hover:opacity-0 transition-all duration-200">
-                </div>
-                <img class="h-56 sm:h-64 w-full object-cover rounded-lg" src="{{ asset('storage/covers/' . $manga->cover) }}" alt="{{ $manga->title }}">
-
-                <div class="absolute bottom-0 p-4">
-                    <p class="text-white text-opacity-60 text-xs leading-[1rem] capitalize">
-                        {{ $manga->types()->first()->title ?? '' }}</p>
-                    <h2 class="text-sm font-semibold text-white">
-                        {{ \Illuminate\Support\Str::limit(strip_tags($manga->title), 25, $end = '...') }}
-                    </h2>
-                </div>
-            </figure>
-        </a>
-
-        <span class="block mt-1 pl-3">
-            @foreach ($manga->genres->take(5) as $genre)
-            <a href="{{ url('/manga?genre=' . $genre->slug) }}" class="inline-block rounded-md text-xs text-gray-500 hover:text-gray-400 transition-all duration-200">
-                <span>{{ $genre->title }}</span>
-                <span class="mr-1">@if (!$loop->last), @endif</span>
-            </a>
-            @endforeach
-
-        </span>
-    </div>
-
-
+    <x-projects.manga :slug="$manga->slug" :title="$manga->title" :type="$manga->type" :cover="$manga->cover" :genres="$manga->genres" />
     @endforeach
 </div>
 <div class="mt-5 mb-5 flex justify-end">
